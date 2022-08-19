@@ -1,0 +1,178 @@
+<style>
+    @font-face {
+    font-family: 'SUIT-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  font-family: 'SUIT-Medium';
+
+
+}
+.button.dark {
+  --background: #2F3545;
+  --shadow: 0 2px 8px -1px rgba(21, 25, 36, 0.32);
+  --shadow-hover: 0 4px 20px -2px rgba(21, 25, 36, 0.5);
+}
+.button.white {
+  --background: #fff;
+  --text: #275efe;
+  --shadow: 0 2px 8px -1px rgba(18, 22, 33, 0.04);
+  --shadow-hover: 0 4px 20px -2px rgba(18, 22, 33, 0.12);
+}
+.button.fast {
+  --duration: .32s;
+}
+
+.button {
+  --background: #275efe;
+  --text: #fff;
+  --font-size: 16px;
+  --duration: .44s;
+  --move-hover: -4px;
+  --shadow: 0 2px 8px -1px rgba(39, 94, 254, 0.32);
+  --shadow-hover: 0 4px 20px -2px rgba(39, 94, 254, 0.5);
+  --font-shadow: var(--font-size);
+  padding: 16px 32px;
+  font-family: "Roboto";
+  font-weight: 500;
+  line-height: var(--font-size);
+  border-radius: 24px;
+  display: block;
+  outline: none;
+  text-decoration: none;
+  font-size: var(--font-size);
+  letter-spacing: 0.5px;
+  background: var(--background);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transform: translateY(var(--y)) translateZ(0);
+  transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+}
+.button div {
+  display: flex;
+  overflow: hidden;
+  text-shadow: 0 var(--font-shadow) 0 var(--text);
+}
+.button div span {
+  display: block;
+  backface-visibility: hidden;
+  font-style: normal;
+  transition: transform var(--duration) ease;
+  transform: translateY(var(--m)) translateZ(0);
+}
+.button div span:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.button div span:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.button div span:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.button div span:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.button div span:nth-child(5) {
+  transition-delay: 0.25s;
+}
+.button div span:nth-child(6) {
+  transition-delay: 0.3s;
+}
+.button div span:nth-child(7) {
+  transition-delay: 0.35s;
+}
+.button div span:nth-child(8) {
+  transition-delay: 0.4s;
+}
+.button div span:nth-child(9) {
+  transition-delay: 0.45s;
+}
+.button div span:nth-child(10) {
+  transition-delay: 0.5s;
+}
+.button div span:nth-child(11) {
+  transition-delay: 0.55s;
+}
+.button:hover {
+  --y: var(--move-hover);
+  --shadow: var(--shadow-hover);
+}
+.button:hover span {
+  --m: calc(var(--font-size) * -1);
+}
+.button.reverse {
+  --font-shadow: calc(var(--font-size) * -1);
+}
+.button.reverse:hover span {
+  --m: calc(var(--font-size));
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+}
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  font-family: "Roboto", Arial;
+  justify-content: center;
+  align-items: center;
+  background: #E4ECFA;
+}
+body .button {
+  margin: 0 12px;
+}
+body .dribbble {
+  position: fixed;
+  display: block;
+  right: 20px;
+  bottom: 20px;
+}
+body .dribbble img {
+  display: block;
+  height: 28px;
+}
+</style>
+<head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<center>
+    <h1 class="animate__animated animate__backInDown" >비공식 솔터고등학교 사이트 (가칭)</h1><br><br><br><h1>🍚오늘의 급식은?</h1><h2 id="gs"></h2><br><br><a href="bab.html" class="button animate__animated animate__backInLeft">이번 달 급식 확인하기</a><br><br><a href="notice.html" class="button reverse dark animate__animated animate__backInRight">학교 공지사항</a><br><br><a href="form.html" class="button animate__animated animate__backInLeft">시험, 수행일정</a><br><br><a href="chat.html" class="button reverse dark animate__animated animate__backInRight">채팅</a>
+<br><br>이 사이트의 모든 내용의 저작권은 솔터고에 있습니다.<br>버그 제보 : 空白#0871 (디스코드) or 010-2456-1054<br></center>
+
+<script>
+    let today = new Date();   
+    $.ajax({
+    url: 'https://schoolmenukr.ml/api/high/J100006523?date=' + today.getDate() + '&allergy=hidden', // 읽어올 문서
+    type: 'GET', // 방식
+    dataType: 'text', // 문서 타입
+    timeout: 1000, // 시간 설정
+    error: function(){ // 로딩 에러시
+        alert('API를 불러오는데 실패했습니다, 새로고침해주세요.');
+    },
+    success: function(json){
+        var jsonn = $.parseJSON(json);
+        var kyou = jsonn["menu"][0]["lunch"]
+        if (kyou == '') {
+            var kyou = '없습니다.'
+        }
+        $('#gs').append(kyou);
+} 
+});
+
+</script>
